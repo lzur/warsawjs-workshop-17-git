@@ -1,0 +1,24 @@
+{
+  "name": "warsawjs-workshop-17-git",
+  "version": "0.1.0",
+  "description": "a demo project for learning git",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rkaw92/warsawjs-workshop-17-git.git"
+  },
+  "keywords": [
+    "git",
+    "demo",
+    "learning"
+  ],
+  "author": "Robert Kawecki <robert+npm@rkaw.pl>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rkaw92/warsawjs-workshop-17-git/issues"
+  },
+  "homepage": "https://github.com/rkaw92/warsawjs-workshop-17-git#readme"
+}
