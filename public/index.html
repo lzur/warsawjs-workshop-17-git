@@ -20,6 +20,7 @@
         padding: 1.0em;
       }
     </style>
+    <script src="/socket.io/socket.io.js"></script>
   </head>
   <body>
     <main>
@@ -33,11 +34,24 @@
           <li><strong>Arthur Dent</strong> - Jak opuścić Ziemię i zostać gwiazdą JS</li>
           <li><strong>[JS-AI v1]</strong> - Co nowego w ECMAScript 2058? (Pierwsza w historii prelekcja generowana i wygłaszana w 100% maszynowo! Deep learning! Wow!)</li>
         </ul></p>
+        <section class="checkins">
+          <p>Zameldowało się już <span id="checkin_counter">X</span> osób!</p>
+          <button id="checkin_button">Zamelduj się na Marsie</button>
+        </section>
         <section class="comments">
           <h2>Komentarze:</h2>
           <p>(Na razie brak komentarzy)</p>
         </section>
       </article>
     </main>
+    <script>
+      var socket = io();
+      document.getElementById('checkin_button').addEventListener('click', function() {
+        socket.emit('checkin', {});
+      });
+      socket.on('update', function(data) {
+        document.getElementById('checkin_counter').textContent = data.count;
+      });
+    </script>
   </body>
 </html>
