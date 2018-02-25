@@ -1,0 +1,25 @@
+From bc96b10135c53c365328084b70579d0c71e7878c Mon Sep 17 00:00:00 2001
+From: Robert Kawecki <robert+github@rkaw.pl>
+Date: Sun, 25 Feb 2018 03:13:59 +0100
+Subject: [PATCH] Add a /status endpoint for monitoring
+
+For #1
+---
+ server.js | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/server.js b/server.js
+index 49db161..d4c345a 100644
+--- a/server.js
++++ b/server.js
+@@ -6,4 +6,7 @@ const express = require('express');
+ // Init:
+ const app = express();
+ app.use(express.static('public'));
++app.get('/status', function(req, res) {
++  res.send({ ok: true });
++});
+ app.listen(process.env.HTTP_PORT || 3000);
+-- 
+2.11.0
+

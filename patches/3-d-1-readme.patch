@@ -1,0 +1,24 @@
+From 6587338e5eac8c4e2a93e9c5c6206054de2830ca Mon Sep 17 00:00:00 2001
+From: Robert Kawecki <robert+github@rkaw.pl>
+Date: Sun, 25 Feb 2018 04:08:57 +0100
+Subject: [PATCH] Add a README.md
+
+---
+ README.md | 5 +++++
+ 1 file changed, 5 insertions(+)
+ create mode 100644 README.md
+
+diff --git a/README.md b/README.md
+new file mode 100644
+index 0000000..878ea55
+--- /dev/null
++++ b/README.md
+@@ -0,0 +1,5 @@
++# MarsJS meetup organizer
++
++## Co to jest?
++Ten projekt zawiera serwer HTTP, który serwuje opis aktualnego eventu MarsJS
++i pozwala uczestnikom zgłaszać swoją obecność.REA
+-- 
+2.11.0
+

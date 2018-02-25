@@ -1,0 +1,51 @@
+From 3dd155a4f1359dd465b5a9cb556794806e5b4df2 Mon Sep 17 00:00:00 2001
+From: Robert Kawecki <robert+github@rkaw.pl>
+Date: Sun, 25 Feb 2018 04:02:44 +0100
+Subject: [PATCH] Add a button and widget for counting attendees
+
+This enables client-side usage of the MarsJS attendee counter.
+A simple UI is provided for registering one's attendance at the meetup.
+---
+ public/index.html | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+
+diff --git a/public/index.html b/public/index.html
+index f713fa6..fabf0c3 100644
+--- a/public/index.html
++++ b/public/index.html
+@@ -20,6 +20,7 @@
+         padding: 1.0em;
+       }
+     </style>
++    <script src="/socket.io/socket.io.js"></script>
+   </head>
+   <body>
+     <main>
+@@ -33,11 +34,24 @@
+           <li><strong>Arthur Dent</strong> - Jak opuścić Ziemię i zostać gwiazdą JS</li>
+           <li><strong>[JS-AI v1]</strong> - Co nowego w ECMAScript 2058? (Pierwsza w historii prelekcja generowana i wygłaszana w 100% maszynowo! Deep learning! Wow!)</li>
+         </ul></p>
++        <section class="checkins">
++          <p>Zameldowało się już <span id="checkin_counter">X</span> osób!</p>
++          <button id="checkin_button">Zamelduj się na Marsie</button>
++        </section>
+         <section class="comments">
+           <h2>Komentarze:</h2>
+           <p>(Na razie brak komentarzy)</p>
+         </section>
+       </article>
+     </main>
++    <script>
++      var socket = io();
++      document.getElementById('checkin_button').addEventListener('click', function() {
++        socket.emit('checkin', {});
++      });
++      socket.on('update', function(data) {
++        document.getElementById('checkin_counter').textContent = data.count;
++      });
++    </script>
+   </body>
+ </html>
+-- 
+2.11.0
+

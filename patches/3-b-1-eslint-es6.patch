@@ -1,0 +1,26 @@
+From 938f35c3fdd95ca340660e50677b1da6432e979b Mon Sep 17 00:00:00 2001
+From: Robert Kawecki <robert+github@rkaw.pl>
+Date: Sun, 25 Feb 2018 03:35:45 +0100
+Subject: [PATCH] Enable parsing of ES6 in eslint
+
+This patch tells eslint that the JS files can contain ECMAScript 6 constructs.
+It fixes a linting error on server.js.
+---
+ .eslintrc.yaml | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/.eslintrc.yaml b/.eslintrc.yaml
+index 925eea8..c165687 100644
+--- a/.eslintrc.yaml
++++ b/.eslintrc.yaml
+@@ -1,6 +1,7 @@
+ env:
+   browser: true
+   node: true
++  es6: true
+ rules:
+   strict:
+     - error
+-- 
+2.11.0
+

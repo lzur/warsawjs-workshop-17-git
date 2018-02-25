@@ -1,0 +1,47 @@
+From 4d06d7783b928644b10a1bcaa0d12a95305da98c Mon Sep 17 00:00:00 2001
+From: Robert Kawecki <robert+github@rkaw.pl>
+Date: Sun, 25 Feb 2018 04:00:29 +0100
+Subject: [PATCH] Add real-time attendee counter (server-side API)
+
+This patch implements a socket.io-based API that allows clients to "check in", thereby increasing the meetup's attendee count.
+---
+ server.js | 21 +++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
+
+diff --git a/server.js b/server.js
+index 3ea6b3c..2b3e550 100644
+--- a/server.js
++++ b/server.js
+@@ -9,8 +9,29 @@ const socketio = require('socket.io');
+ const app = express();
+ const server = http.Server(app);
+ const io = socketio(server);
++
+ app.use(express.static('public'));
+ app.get('/status', function(req, res) {
+   res.send({ ok: true });
+ });
++
++let checkins = {
++  count: 0
++};
++io.on('connection', function(socket) {
++  let clientCheckedIn = false;
++  // Send the current state to the client immediately:
++  socket.emit('update', checkins);
++  // Wait for check-ins, update state and broadcast:
++  socket.on('checkin', function() {
++    // Guard clause: do not count the same client twice.
++    if (clientCheckedIn) {
++      return;
++    }
++    clientCheckedIn = true;
++    checkins.count += 1;
++    io.emit('update', checkins);
++  });
++});
++
+ server.listen(process.env.HTTP_PORT || 3000);
+-- 
+2.11.0
+
